@@ -7,17 +7,21 @@ import java.util.regex.*;
 public class BalancedBracket {
     
     public static boolean isBalanced(String e) {
-        Stack s = new Stack();
+        Stack<Character> s = new Stack<>();
         for (int i=0;i< e.length();i++)
         {
-            if (e.charAt(i)==']' && (char)s.peek() =='[')
-                s.pop();
-            else if (e.charAt(i)=='}' && (char)s.peek() =='{')
-                s.pop();
-            else if (e.charAt(i)==')' && (char)s.peek() =='(')
-                s.pop();
-            else
-                s.push(e.charAt(i));
+            try {
+                if (e.charAt(i)==']' && s.peek() =='[')
+                    s.pop();
+                else if (e.charAt(i)=='}' && s.peek() =='{')
+                    s.pop();
+                else if (e.charAt(i)==')' && s.peek() =='(')
+                    s.pop();
+                else
+                    s.push(e.charAt(i));
+            } catch (Exception ex){
+                return false;
+            }
         }
         return s.isEmpty();
     }
